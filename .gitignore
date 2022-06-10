@@ -11,8 +11,9 @@ simulation
 *.xml
 *.rpt
 *.qpf
-*.qsf
 *.qws
 
 led_counter.*
+c5_pin_model_dump.txt
+ledshow.qsf
 
