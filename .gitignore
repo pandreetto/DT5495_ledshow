@@ -1,0 +1,18 @@
+.bak
+
+# Quartus Prime files and directories
+components
+db
+greybox_tmp
+incremental_db
+output_files
+simulation
+
+*.xml
+*.rpt
+*.qpf
+*.qsf
+*.qws
+
+led_counter.*
+
