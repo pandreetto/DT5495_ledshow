@@ -9,36 +9,31 @@ port(
 end ledshow_core;
 
 architecture rtl of ledshow_core is
-    type ldirection is (sx, dx);
+    subtype ldirection is integer range -1 to 1;
     signal main_reg : std_logic_vector(7 downto 0) := "00000001";
 begin
     led_reg <= main_reg;
 
     ctrl_proc : process(clock)
-        variable led_dir : ldirection := sx;
+        variable led_dir : ldirection := 1;
     begin
         if rising_edge(clock) then
 
             if main_reg(0) = '1' then
-                led_dir := sx;
+                led_dir := 1;
                 main_reg(0) <= '0';
                 main_reg(1) <= '1';
             end if;
 
             for idx in 1 to 6 loop
                 if main_reg(idx) = '1' then
-                    led_dir := dx;
                     main_reg(idx) <= '0';
-                    if led_dir = sx then
-                        main_reg(idx + 1) <= '1';
-                    else
-                        main_reg(idx - 1) <= '1';
-                    end if;
+                    main_reg(idx + led_dir) <= '1';
                 end if;
             end loop;
 
             if main_reg(7) = '1' then
-                led_dir := dx;
+                led_dir := -1;
                 main_reg(6) <= '1';
                 main_reg(7) <= '0';
             end if;

@@ -113,22 +113,16 @@ architecture rtl of ledshow is
           
 begin
 
+    -- Counter
+    -- -------
+    counter_instance: entity work.led_counter
+    port map(CLK, led_clock);
+
     -- Core logic for led effects
     -- --------------------------
 
     ledshow_instance: entity work.ledshow_core
-    port map(
-        clock   => led_clock,
-        led_reg => LED
-    );
-
-    -- Counter
-    -- -------
-    counter_instance: entity work.led_counter
-    port map(
-        clock => CLK,
-        cout => led_clock
-    );
+    port map(led_clock, LED);
 
     -- Unused output ports are explicitally set to HiZ
     -- ----------------------------------------------------
